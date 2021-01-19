@@ -438,7 +438,7 @@ def password_manager():
     def mostra_istruzioni():
         #os.startfile("istruzioni.txt")
         bxx_ = webdriver.Chrome("C:\\Windows\\chromedriver.exe")
-        bxx_.get("https://docs.google.com/document/d/126J2A_eiF6B6rXYeKpBgHcae1oO-CkcPSuE3OxwlaXg/edit?usp=sharing")
+        bxx_.get("https://www.reddit.com")
 
 
     istruzioni = Button(finestra, text="Vedi le istruzioni", command = mostra_istruzioni)
