@@ -18,7 +18,7 @@ import json
 from functools import partial
 from selenium import webdriver
 
-versione_attuale = "PasswordManager1.0.4.3"
+versione_attuale = "PasswordManager1.0.4.4"
 
 Percorso = os.getcwd()
 
@@ -88,6 +88,10 @@ def password_manager():
             email_presa = emailxx.get()
             passw_presa = passwordxx.get()
 
+            social_preso = social_preso.lower()
+            social_preso = social_preso.capitalize()
+            print(social_preso)
+
             if social_preso == "" or email_presa == "" or passw_presa == "":
                 messagebox.showwarning(message="Devi compilare tutti i campi, riprova.")
                 aggiungi()
@@ -143,18 +147,18 @@ def password_manager():
                 lettura_json = json.loads(lettura_file)
 
                 da_modificare_preso = social_da_modificare.get()
-                da_modificare_preso = da_modificare_preso.lower()
+                da_modificare_preso_ = da_modificare_preso.lower()
                 social_da_modificare.delete(0, END)
 
                 lista_controllo = []
                 for eleme in lettura_json:
                     lista_controllo.append(eleme.lower())
 
-                if da_modificare_preso == "":
+                if da_modificare_preso_ == "":
                     messagebox.showwarning(message="Devi scrivere il Social")
                     return
 
-                if da_modificare_preso not in lista_controllo:
+                if da_modificare_preso_ not in lista_controllo:
                     messagebox.showerror(message="Devi inserire un nome valido!")
                     return
 
@@ -162,9 +166,9 @@ def password_manager():
                 social_da_modificare.destroy()
                 comando_invio.destroy()
                 esempio_scritto.destroy()
-                da_modificare_preso = da_modificare_preso.capitalize()
+                da_modificare_preso__ = da_modificare_preso.capitalize()
 
-                cosa_sto_cambiando = Label(finestra_modifica, text=f"{da_modificare_preso}", font=10, bg="white")
+                cosa_sto_cambiando = Label(finestra_modifica, text=f"{da_modificare_preso__}", font=10, bg="white")
                 cosa_sto_cambiando.pack()
 
                 try:
@@ -177,9 +181,9 @@ def password_manager():
 
                         def prendi_testo_email():
                             email_presa = cambia_email.get()
-                            email_vecchia = lettura_json[f"{da_modificare_preso}"]["E-mail"]
+                            email_vecchia = lettura_json[f"{da_modificare_preso__}"]["E-mail"]
 
-                            lettura_json[f"{da_modificare_preso}"]["E-mail"] = f"{email_presa}"
+                            lettura_json[f"{da_modificare_preso__}"]["E-mail"] = f"{email_presa}"
 
                             riapertura_file = open("pw_manager_pw.json", "w")
                             json.dump(lettura_json, riapertura_file, indent=4)
@@ -201,9 +205,9 @@ def password_manager():
 
                         def prendi_testo_pass():
                             pass_presa = cambia_pass.get()
-                            pass_vecchia = lettura_json[f"{da_modificare_preso}"]["Password"]
+                            pass_vecchia = lettura_json[f"{da_modificare_preso__}"]["Password"]
 
-                            lettura_json[f"{da_modificare_preso}"]["Password"] = f"{pass_presa}"
+                            lettura_json[f"{da_modificare_preso__}"]["Password"] = f"{pass_presa}"
 
                             riapertura_file = open("pw_manager_pw.json", "w")
                             json.dump(lettura_json, riapertura_file, indent=4)
@@ -278,18 +282,18 @@ def password_manager():
                 lettura_json = json.loads(lettura_file)
 
                 social_da_cancellare_preso = social_da_cancellare.get()
-                social_da_cancellare_preso = social_da_cancellare_preso.lower()
+                social_da_cancellare_preso_minuscolo = social_da_cancellare_preso.lower()
                 social_da_cancellare.delete(0, END)
 
                 lista_controllo = []
                 for eleme in lettura_json:
                     lista_controllo.append(eleme.lower())
 
-                if social_da_cancellare_preso == "":
+                if social_da_cancellare_preso_minuscolo == "":
                     messagebox.showwarning(message="Devi scrivere il Social")
                     return
 
-                if social_da_cancellare_preso not in lista_controllo:
+                if social_da_cancellare_preso_minuscolo not in lista_controllo:
                     messagebox.showerror(message="Devi inserire un nome valido!")
                     return
 
@@ -297,13 +301,13 @@ def password_manager():
                 social_da_cancellare.destroy()
                 comando_invio.destroy()
                 esempio_scritto.destroy()
-                social_da_cancellare_preso = social_da_cancellare_preso.capitalize()
+                social_da_cancellare_preso_maiuscolo = social_da_cancellare_preso.capitalize()
 
 
-                vuoi_cancellare = Label(finestra_cancella, text="Vuoi cancellare " + f"{social_da_cancellare_preso}" + "?", bg="white", font=10)
+                vuoi_cancellare = Label(finestra_cancella, text="Vuoi cancellare " + f"{social_da_cancellare_preso_maiuscolo}" + "?", bg="white", font=10)
                 vuoi_cancellare.pack(pady=20)
 
-                bottone_si = Button(finestra_cancella, text="  Sì  ", command=partial(si, social_da_cancellare_preso))
+                bottone_si = Button(finestra_cancella, text="  Sì  ", command=partial(si, social_da_cancellare_preso_maiuscolo))
                 bottone_si.place(x=90, y=85)
 
                 bottone_no = Button(finestra_cancella, text=" No ", command=no)
@@ -438,7 +442,7 @@ def password_manager():
     def mostra_istruzioni():
         #os.startfile("istruzioni.txt")
         bxx_ = webdriver.Chrome("C:\\Windows\\chromedriver.exe")
-        bxx_.get("https://www.reddit.com")
+        bxx_.get("https://docs.google.com/document/d/126J2A_eiF6B6rXYeKpBgHcae1oO-CkcPSuE3OxwlaXg/edit?usp=sharing")
 
 
     istruzioni = Button(finestra, text="Vedi le istruzioni", command = mostra_istruzioni)
